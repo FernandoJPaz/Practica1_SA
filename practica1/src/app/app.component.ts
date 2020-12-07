@@ -10,15 +10,12 @@ export class AppComponent {
 
   points = 1;
 
-  Plus(){
-    
-    this.points++;
-
+  Plus(): void {
+    this.points ++;
   }
 
-  Reset(){
-    
-    this.points=0;
-
+  Reset(): void {
+    this.points = 0;
   }
+
 }
