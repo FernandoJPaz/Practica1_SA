@@ -1,33 +1,29 @@
 pipeline{
   agent any
   tools {nodejs "node"}
-
   stages{
 
     stage('Git') {
-        git branch: '', url: ''
+       steps { git branch: 'main', url: 'https://github.com/FernandoJPaz/Practica1_SA' }
+       
     }
 
     stage('Install') {
-        steps { sh 'npm install' }
+        steps { bat 'npm install' }
     }
 
     stage('Test') {
-        parallel {
-            
-            stage('Static code analysis') {
-                steps { sh 'npm run-script lint' }
-            }
         
-            stage('Unit tests') {
-            steps { sh 'npm run-script test' }
-        }
-      }
+        steps { bat 'npm test --source-map=false --watch=false' }
+    
     }
-
+    
     stage('Build') {
-      steps { sh 'npm run-script build' }
+	
+		steps { bat 'npm run-script build' }
+		
     }
+	
 
   }
 }
